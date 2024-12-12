@@ -1,7 +1,8 @@
 import { PROJECT_STATUS_CLASS_MAP, PROJECT_STATUS_LABELS } from "@/constants";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { Head } from "@inertiajs/react";
-export default function Show({ auth, project }) {
+import TasksTable from "../Tasks/TasksTable";
+export default function Show({ auth, project, tasks, queryParams }) {
     console.log(project);
     return (
         <AuthenticatedLayout
@@ -16,14 +17,14 @@ export default function Show({ auth, project }) {
             <div className="py-12">
                 <div className="mx-auto max-w-7xl sm:px-6 lg:px-8">
                     <div className="overflow-hidden bg-white shadow-sm sm:rounded-lg">
-                        <div className="p-2 text-gray-900">
-                            <div>
-                                <img
-                                    src={project.image_path}
-                                    alt=""
-                                    className="w-full h-64 object-cover"
-                                />
-                            </div>
+                        <div>
+                            <img
+                                src={project.image_path}
+                                alt=""
+                                className="w-full h-64 object-cover"
+                            />
+                        </div>
+                        <div className="p-4 text-gray-900">
                             <div className="grid gap-1 grid-cols-2 mt-2">
                                 <div>
                                     <div>
@@ -97,6 +98,26 @@ export default function Show({ auth, project }) {
                                     </div>
                                 </div>
                             </div>
+                            <div>
+                                <label className="font-bold text-lg">
+                                    Description
+                                </label>
+                                <p className="mt-1">{project.description}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div className="pb-12">
+                <div className="mx-auto max-w-7xl sm:px-6 lg:px-8">
+                    <div className="overflow-hidden bg-white shadow-sm sm:rounded-lg">
+                        <div className="p-4 text-gray-900">
+                            <TasksTable
+                                tasks={tasks}
+                                queryParams={queryParams}
+                                showProjectName={false}
+                            />
                         </div>
                     </div>
                 </div>
