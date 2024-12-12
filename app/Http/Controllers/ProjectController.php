@@ -7,6 +7,7 @@ use App\Http\Requests\UpdateProjectRequest;
 use App\Http\Resources\ProjectResource;
 use App\Http\Resources\TaskResource;
 use App\Models\Project;
+use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 
 class ProjectController extends Controller
@@ -33,6 +34,7 @@ class ProjectController extends Controller
         return Inertia::render('Projects/Index', [
             'projects' => ProjectResource::collection($projects),
             'queryParams' => request()->query() ?: null,
+            'success' => session('success'),
         ]);
     }
 
@@ -41,7 +43,7 @@ class ProjectController extends Controller
      */
     public function create()
     {
-        //
+        return Inertia::render('Projects/Create', []);
     }
 
     /**
@@ -49,7 +51,17 @@ class ProjectController extends Controller
      */
     public function store(StoreProjectRequest $request)
     {
-        //
+        $data = $request->validated();
+        $image = $data['image'] ?? null;
+        $data['created_by'] = Auth::id();
+        $data['updated_by'] = Auth::id();
+        if ($image) {
+            $data['image_path'] = $image->store('projects', 'public');
+        }
+        Project::create($data);
+
+        return redirect()->route('projects.index')
+            ->with('success', 'Project created successfully');
     }
 
     /**
@@ -57,8 +69,6 @@ class ProjectController extends Controller
      */
     public function show(Project $project)
     {
-
-
         $query = $project->tasks();
 
         $sortField = request('sort_field', 'created_at');
