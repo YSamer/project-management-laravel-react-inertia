@@ -8,6 +8,7 @@ use App\Http\Resources\ProjectResource;
 use App\Http\Resources\TaskResource;
 use App\Models\Project;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
 
 class ProjectController extends Controller
@@ -95,7 +96,9 @@ class ProjectController extends Controller
      */
     public function edit(Project $project)
     {
-        //
+        return Inertia::render('Projects/Edit', [
+            'project' => new ProjectResource($project),
+        ]);
     }
 
     /**
@@ -103,7 +106,19 @@ class ProjectController extends Controller
      */
     public function update(UpdateProjectRequest $request, Project $project)
     {
-        //
+        $data = $request->validated();
+        $image = $data['image'] ?? null;
+        $data['updated_by'] = Auth::id();
+        if ($image) {
+            if ($project->image_path) {
+                Storage::disk('public')->delete($project->image_path);
+            }
+            $data['image_path'] = $image->store('projects', 'public');
+        }
+        $project->update($data);
+
+        return redirect()->route('projects.index')
+            ->with('success', 'Project updated successfully');
     }
 
     /**
@@ -111,6 +126,11 @@ class ProjectController extends Controller
      */
     public function destroy(Project $project)
     {
-        //
+
+        $name = $project->name;
+        $project->delete();
+
+        return redirect()->route('projects.index')
+            ->with('success', 'Project "' . $name . '" was deleted');
     }
 }

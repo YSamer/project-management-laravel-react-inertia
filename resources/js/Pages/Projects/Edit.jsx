@@ -7,19 +7,21 @@ import { PROJECT_STATUS_OPTIONS } from "@/constants";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { Head, Link, useForm } from "@inertiajs/react";
 
-export default function Create({ auth }) {
+export default function Edit({ auth, project }) {
+    console.log(project);
     const { data, setData, post, errors, reset } = useForm({
         image: "",
-        name: "",
-        status: "",
-        description: "",
-        due_date: "",
+        name: project.name || "",
+        status: project.status || "",
+        description: project.description || "",
+        due_date: project.due_date || "",
+        _method: "PUT",
     });
 
     const onSubmit = (e) => {
         e.preventDefault();
 
-        post(route("projects.store"));
+        post(route("projects.update", project.id));
     };
     return (
         <AuthenticatedLayout
@@ -27,7 +29,7 @@ export default function Create({ auth }) {
             header={
                 <div className="flex items-center justify-between">
                     <h2 className="text-xl font-semibold leading-tight text-gray-800">
-                        Create a new project
+                        Edit project {project.name || ""}
                     </h2>
                 </div>
             }
@@ -40,6 +42,15 @@ export default function Create({ auth }) {
                             onSubmit={onSubmit}
                             className="p-4 sm:p-8 bg-white shadow sm:rounded-lg"
                         >
+                            {/* Preview Image */}
+                            {project.image_path && (
+                                <div className="mb-4">
+                                    <img
+                                        src={project.image_path}
+                                        className="w-64"
+                                    />
+                                </div>
+                            )}
                             {/* Image */}
                             <div>
                                 <InputLabel
