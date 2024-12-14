@@ -12,9 +12,17 @@ export default function Show({ auth, task }) {
         <AuthenticatedLayout
             user={auth.user}
             header={
-                <h2 className="text-xl font-semibold leading-tight text-gray-800">
-                    {`Task "${task.name}"`}
-                </h2>
+                <div className="flex items-center justify-between">
+                    <h2 className="text-xl font-semibold leading-tight text-gray-800">
+                        {`Task "${task.name}"`}
+                    </h2>
+                    <Link
+                        href={route("tasks.edit", task.id)}
+                        className="bg-blue-500 px-3 py-1 rounded shadow text-white transition-all hover:bg-blue-600"
+                    >
+                        Edit
+                    </Link>
+                </div>
             }
         >
             <Head title={`Task "${task.name}"`} />
