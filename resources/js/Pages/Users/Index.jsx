@@ -108,6 +108,18 @@ export default function Index({ auth, users, queryParams = null, success }) {
                                                 Email
                                             </TableHeading>
                                             <TableHeading
+                                                name="role"
+                                                sort_field={
+                                                    queryParams.sort_field
+                                                }
+                                                sort_direction={
+                                                    queryParams.sort_direction
+                                                }
+                                                sortChanged={sortChanged}
+                                            >
+                                                Role
+                                            </TableHeading>
+                                            <TableHeading
                                                 name="created_at"
                                                 sort_field={
                                                     queryParams.sort_field
@@ -163,6 +175,7 @@ export default function Index({ auth, users, queryParams = null, success }) {
                                             </th>
                                             <th className="px-3 py-3"></th>
                                             <th className="px-3 py-3"></th>
+                                            <th className="px-3 py-3"></th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -181,6 +194,9 @@ export default function Index({ auth, users, queryParams = null, success }) {
                                                 <th className="px-3 py-2 text-black text-nowrap hover:underline">
                                                     {user.email}
                                                 </th>
+                                                <td className="px-3 py-2 text-black text-nowrap">
+                                                    {user.role}
+                                                </td>
 
                                                 <td className="px-3 py-2 text-nowrap">
                                                     {user.created_at}

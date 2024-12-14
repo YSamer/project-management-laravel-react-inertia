@@ -57,3 +57,10 @@ export const TASK_PRIORITY_OPTIONS = [
     { value: "medium", label: "Medium" },
     { value: "high", label: "High" },
 ];
+
+// Users Roles 
+export const USER_ROLES = [
+    { value: "admin", label: "Admin" },
+    { value: "manager", label: "Manager" },
+    { value: "user", label: "User" },
+];
