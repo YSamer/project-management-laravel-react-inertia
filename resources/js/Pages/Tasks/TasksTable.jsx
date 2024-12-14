@@ -14,6 +14,7 @@ export default function TasksTable({
     success,
     queryParams = null,
     showProjectName = true,
+    currentRoute = "tasks.index",
 }) {
     queryParams = queryParams || {};
 
@@ -23,7 +24,7 @@ export default function TasksTable({
         } else {
             delete queryParams[name];
         }
-        router.get(route("tasks.index"), queryParams);
+        router.get(route(currentRoute), queryParams);
     };
 
     const onKeyPress = (name, e) => {
@@ -39,7 +40,7 @@ export default function TasksTable({
             queryParams.sort_field = name;
             queryParams.sort_direction = "asc";
         }
-        router.get(route("tasks.index"), queryParams);
+        router.get(route(currentRoute), queryParams);
     };
 
     const deleteTask = (task) => {
@@ -169,7 +170,7 @@ export default function TasksTable({
                                     />
                                 </td>
                                 {showProjectName && (
-                                    <th className="px-3 py-2 text-nowrap text-black hover:underline">
+                                    <th className="px-3 py-2 text-black hover:underline">
                                         <Link
                                             href={route(
                                                 "projects.show",
@@ -180,7 +181,7 @@ export default function TasksTable({
                                         </Link>
                                     </th>
                                 )}
-                                <th className="px-3 py-2 text-nowrap text-black hover:underline">
+                                <th className="px-3 py-2 text-black hover:underline">
                                     <Link href={route("tasks.show", task.id)}>
                                         {task.name}
                                     </Link>

@@ -41,9 +41,9 @@ export const TASK_STATUS_OPTIONS = [
 ];
 
 export const TASK_PRIORITY_CLASS_MAP = {
-    low: "bg-gray-50",
-    medium: "bg-yellow-50",
-    high: "bg-red-50",
+    low: "bg-gray-500",
+    medium: "bg-yellow-500",
+    high: "bg-red-500",
 };
 
 export const TASK_PRIORITY_LABELS = {
