@@ -11,6 +11,7 @@ import { Link, router } from "@inertiajs/react";
 
 export default function TasksTable({
     tasks,
+    success,
     queryParams = null,
     showProjectName = true,
 }) {
@@ -41,8 +42,22 @@ export default function TasksTable({
         router.get(route("tasks.index"), queryParams);
     };
 
+    const deleteTask = (task) => {
+        if (!window.confirm("Are you sure you want to delete a task")) {
+            return;
+        }
+        router.delete(route("tasks.destroy", task.id));
+    };
+
     return (
         <>
+            {/* When Success */}
+            {success && (
+                <div className="bg-green-100 border-l-4 border-green-500 text-green-700 p-4 rounded-t-md">
+                    {success}
+                </div>
+            )}
+
             <div className=" overflow-auto">
                 <table className="w-full text-sm text-left rtl:text-right text-gray-500 ">
                     <thead className="text-xs text-gray-700 uppercase bg-gray-50 border-b-2 border-gray-500">
@@ -189,19 +204,20 @@ export default function TasksTable({
                                 <td className="px-3 py-2">
                                     {task.createdBy.name}
                                 </td>
-                                <td className="px-3 py-2">
+                                <td className="px-3 py-2 text-nowrap">
                                     <Link
                                         href={route("tasks.edit", task.id)}
                                         className="font-medium text-blue-600 hover:underline mx-1"
                                     >
                                         Edit
                                     </Link>
-                                    <Link
-                                        href={route("tasks.destroy", task.id)}
+                                    <button
+                                        onClick={(e) => deleteTask(task)}
+                                        // href={route("tasks.destroy", task.id)}
                                         className="font-medium text-red-600 hover:underline mx-1"
                                     >
                                         Delete
-                                    </Link>
+                                    </button>
                                 </td>
                             </tr>
                         ))}

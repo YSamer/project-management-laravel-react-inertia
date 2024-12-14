@@ -3,25 +3,28 @@ import InputLabel from "@/Components/InputLabel";
 import SelectInput from "@/Components/SelectInput";
 import TextAreaInput from "@/Components/TextAreaInput";
 import TextInput from "@/Components/TextInput";
-import { PROJECT_STATUS_OPTIONS } from "@/constants";
+import { TASK_PRIORITY_OPTIONS, TASK_STATUS_OPTIONS } from "@/constants";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { Head, Link, useForm } from "@inertiajs/react";
 
-export default function Edit({ auth, project }) {
-    console.log(project);
+export default function Edit({ auth, task, projects, users }) {
+    console.log(task);
     const { data, setData, post, errors, reset } = useForm({
         image: "",
-        name: project.name || "",
-        status: project.status || "",
-        description: project.description || "",
-        due_date: project.due_date || "",
+        name: task.name || "",
+        status: task.status || "",
+        description: task.description || "",
+        due_date: task.due_date || "",
+        priority: task.priority || "",
+        project_id: task.project_id || "",
+        assigned_user_id: task.assigned_user_id || "",
         _method: "PUT",
     });
 
     const onSubmit = (e) => {
         e.preventDefault();
 
-        post(route("projects.update", project.id));
+        post(route("tasks.update", task.id));
     };
     return (
         <AuthenticatedLayout
@@ -29,12 +32,12 @@ export default function Edit({ auth, project }) {
             header={
                 <div className="flex items-center justify-between">
                     <h2 className="text-xl font-semibold leading-tight text-gray-800">
-                        Edit project {project.name || ""}
+                        Edit task {task.name || ""}
                     </h2>
                 </div>
             }
         >
-            <Head title="Projects" />
+            <Head title="Tasks" />
             <div className="py-12">
                 <div className="mx-auto max-w-7xl sm:px-6 lg:px-8">
                     <div className="overflow-hidden bg-white shadow-sm sm:rounded-lg">
@@ -43,22 +46,52 @@ export default function Edit({ auth, project }) {
                             className="p-4 sm:p-8 bg-white shadow sm:rounded-lg"
                         >
                             {/* Preview Image */}
-                            {project.image_path && (
+                            {task.image_path && (
                                 <div className="mb-4">
                                     <img
-                                        src={project.image_path}
+                                        src={task.image_path}
                                         className="w-64"
                                     />
                                 </div>
                             )}
-                            {/* Image */}
+                            {/* Project */}
                             <div>
                                 <InputLabel
-                                    htmlFor="project_image_path"
-                                    value="Project Image"
+                                    htmlFor="task_project_id"
+                                    value="Project"
+                                />
+                                <SelectInput
+                                    id="task_project_id"
+                                    name="project_id"
+                                    value={data.project_id}
+                                    className="mt-1 block w-full"
+                                    onChange={(e) =>
+                                        setData("project_id", e.target.value)
+                                    }
+                                >
+                                    <option value="">Select Project</option>
+                                    {projects.data.map((project) => (
+                                        <option
+                                            key={project.id}
+                                            value={project.id}
+                                        >
+                                            {project.name}
+                                        </option>
+                                    ))}
+                                </SelectInput>
+                                <InputError
+                                    message={errors.project_id}
+                                    className="mt-2"
+                                />
+                            </div>
+                            {/* Image */}
+                            <div className="mt-4">
+                                <InputLabel
+                                    htmlFor="task_image_path"
+                                    value="Task Image"
                                 />
                                 <TextInput
-                                    id="project_image_path"
+                                    id="task_image_path"
                                     type="file"
                                     name="image"
                                     className="mt-1 block w-full"
@@ -75,11 +108,11 @@ export default function Edit({ auth, project }) {
                             {/* Name */}
                             <div className="mt-4">
                                 <InputLabel
-                                    htmlFor="project_name"
-                                    value="Project Name"
+                                    htmlFor="task_name"
+                                    value="Task Name"
                                 />
                                 <TextInput
-                                    id="project_name"
+                                    id="task_name"
                                     type="text"
                                     name="name"
                                     value={data.name}
@@ -97,11 +130,11 @@ export default function Edit({ auth, project }) {
                             {/* Description */}
                             <div className="mt-4">
                                 <InputLabel
-                                    htmlFor="project_description"
-                                    value="Project Description"
+                                    htmlFor="task_description"
+                                    value="Task Description"
                                 />
                                 <TextAreaInput
-                                    id="project_description"
+                                    id="task_description"
                                     name="description"
                                     value={data.description}
                                     className="mt-1 block w-full"
@@ -117,11 +150,11 @@ export default function Edit({ auth, project }) {
                             {/* Deadline */}
                             <div className="mt-4">
                                 <InputLabel
-                                    htmlFor="project_due_date"
-                                    value="Project Deadline"
+                                    htmlFor="task_due_date"
+                                    value="Task Deadline"
                                 />
                                 <TextInput
-                                    id="project_due_date"
+                                    id="task_due_date"
                                     type="date"
                                     name="due_date"
                                     value={data.due_date}
@@ -138,19 +171,20 @@ export default function Edit({ auth, project }) {
                             {/* Status */}
                             <div className="mt-4">
                                 <InputLabel
-                                    htmlFor="project_status"
-                                    value="Project Status"
+                                    htmlFor="task_status"
+                                    value="Task Status"
                                 />
                                 <SelectInput
-                                    id="project_status"
+                                    id="task_status"
                                     name="status"
+                                    value={data.status}
                                     className="mt-1 block w-full"
                                     onChange={(e) =>
                                         setData("status", e.target.value)
                                     }
                                 >
                                     <option value="">Select Status</option>
-                                    {PROJECT_STATUS_OPTIONS.map((option) => (
+                                    {TASK_STATUS_OPTIONS.map((option) => (
                                         <option
                                             key={option.value}
                                             value={option.value}
@@ -164,11 +198,73 @@ export default function Edit({ auth, project }) {
                                     className="mt-2"
                                 />
                             </div>
+                            {/* Priority */}
+                            <div className="mt-4">
+                                <InputLabel
+                                    htmlFor="task_priority"
+                                    value="Task Priority"
+                                />
+                                <SelectInput
+                                    id="task_priority"
+                                    name="priority"
+                                    value={data.priority}
+                                    className="mt-1 block w-full"
+                                    onChange={(e) =>
+                                        setData("priority", e.target.value)
+                                    }
+                                >
+                                    <option value="">Select Priority</option>
+                                    {TASK_PRIORITY_OPTIONS.map((option) => (
+                                        <option
+                                            key={option.value}
+                                            value={option.value}
+                                        >
+                                            {option.label}
+                                        </option>
+                                    ))}
+                                </SelectInput>
+                                <InputError
+                                    message={errors.priority}
+                                    className="mt-2"
+                                />
+                            </div>
+                            {/* Assigned User */}
+                            <div className="mt-4">
+                                <InputLabel
+                                    htmlFor="task_assigned_user"
+                                    value="Assigned User"
+                                />
+                                <SelectInput
+                                    id="task_assigned_user"
+                                    name="assigned_user_id"
+                                    value={data.assigned_user_id}
+                                    className="mt-1 block w-full"
+                                    onChange={(e) =>
+                                        setData(
+                                            "assigned_user_id",
+                                            e.target.value
+                                        )
+                                    }
+                                >
+                                    <option value="">
+                                        Select Assigned User
+                                    </option>
+                                    {users.data.map((user) => (
+                                        <option key={user.id} value={user.id}>
+                                            {user.name}
+                                        </option>
+                                    ))}
+                                </SelectInput>
+                                <InputError
+                                    message={errors.assigned_user_id}
+                                    className="mt-2"
+                                />
+                            </div>
                             {/* Buttons */}
                             <div className="mt-4 text-right">
                                 {/* Cancel Button */}
                                 <Link
-                                    href={route("projects.index")}
+                                    href={route("tasks.index")}
                                     className="bg-gray-400 py-1 px-3 text-gray-800 rounded shadow transition-all hover:bg-gray-500 mr-2"
                                 >
                                     Cancel
