@@ -19,11 +19,26 @@ class DatabaseSeeder extends Seeder
 
         User::factory()->create([
             'name' => 'Yahya (Logic4IT)',
-            'email' => 'ysamer2525@gmail.com',
-            'password' => Hash::make('Yahya@2525'),
+            'email' => 'yahya@test.com',
+            'password' => Hash::make('12345678'),
             'email_verified_at' => now(),
             'role' => 'admin',
             'remember_token' => 'c0jtWRYvTm',
+        ]);
+
+        User::factory()->create([
+            'name' => 'Mohammed',
+            'email' => 'mohammed@test.com',
+            'password' => Hash::make('12345678'),
+            'email_verified_at' => now(),
+            'role' => 'user',
+        ]);
+        User::factory()->create([
+            'name' => 'Hamza',
+            'email' => 'hamza@test.com',
+            'password' => Hash::make('12345678'),
+            'email_verified_at' => now(),
+            'role' => 'user',
         ]);
     }
 }
