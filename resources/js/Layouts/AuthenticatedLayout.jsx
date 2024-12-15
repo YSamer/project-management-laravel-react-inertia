@@ -11,6 +11,29 @@ export default function AuthenticatedLayout({ header, children }) {
     const [showingNavigationDropdown, setShowingNavigationDropdown] =
         useState(false);
 
+    const mainPages = [
+        {
+            label: "Dashboard",
+            href: "dashboard",
+        },
+        {
+            label: "Projects",
+            href: "projects.index",
+        },
+        {
+            label: "Tasks",
+            href: "tasks.index",
+        },
+        {
+            label: "Users",
+            href: "users.index",
+        },
+        {
+            label: "My Tasks",
+            href: "tasks.myTasks",
+        },
+    ];
+
     return (
         <div className="min-h-screen bg-gray-100">
             <nav className="border-b border-gray-100 bg-white">
@@ -24,36 +47,15 @@ export default function AuthenticatedLayout({ header, children }) {
                             </div>
 
                             <div className="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                                <NavLink
-                                    href={route("dashboard")}
-                                    active={route().current("dashboard")}
-                                >
-                                    Dashboard
-                                </NavLink>
-                                <NavLink
-                                    href={route("projects.index")}
-                                    active={route().current("projects.index")}
-                                >
-                                    Projects
-                                </NavLink>
-                                <NavLink
-                                    href={route("tasks.index")}
-                                    active={route().current("tasks.index")}
-                                >
-                                    Tasks
-                                </NavLink>
-                                <NavLink
-                                    href={route("users.index")}
-                                    active={route().current("users.index")}
-                                >
-                                    Users
-                                </NavLink>
-                                <NavLink
-                                    href={route("tasks.myTasks")}
-                                    active={route().current("tasks.myTasks")}
-                                >
-                                    My Tasks
-                                </NavLink>
+                                {mainPages.map((page) => (
+                                    <NavLink
+                                        key={page.label}
+                                        href={route(page.href)}
+                                        active={route().current(page.href)}
+                                    >
+                                        {page.label}
+                                    </NavLink>
+                                ))}
                             </div>
                         </div>
 
@@ -152,12 +154,15 @@ export default function AuthenticatedLayout({ header, children }) {
                     }
                 >
                     <div className="space-y-1 pb-3 pt-2">
-                        <ResponsiveNavLink
-                            href={route("dashboard")}
-                            active={route().current("dashboard")}
-                        >
-                            Dashboard
-                        </ResponsiveNavLink>
+                        {mainPages.map((page) => (
+                            <ResponsiveNavLink
+                                key={page.label}
+                                href={route(page.href)}
+                                active={route().current(page.href)}
+                            >
+                                {page.label}
+                            </ResponsiveNavLink>
+                        ))}
                     </div>
 
                     <div className="border-t border-gray-200 pb-1 pt-4">
