@@ -27,7 +27,7 @@ class ProjectResource extends JsonResource
                 : null,
             'createdBy' => new UserResource($this->createdBy),
             'updatedBy' => new UserResource($this->updatedBy),
-            'due_date' => (new Carbon($this->due_date))->format('Y-m-d'),
+            'due_date' => $this->due_date ? (new Carbon($this->due_date))->format('Y-m-d') : null,
             'created_at' => $this->created_at?->format('Y-m-d'),
             'updated_at' => $this->updated_at,
         ];

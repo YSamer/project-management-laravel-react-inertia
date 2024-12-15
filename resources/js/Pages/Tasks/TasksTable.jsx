@@ -164,7 +164,7 @@ export default function TasksTable({
                                 <td className="px-3 py-2">{task.id}</td>
                                 <td className="px-3 py-2">
                                     <img
-                                        className="h-20 w-48 object-cover rounded-sm"
+                                        className="h-20 w-48 object-contain rounded-sm"
                                         src={task.image_path}
                                         alt=""
                                     />

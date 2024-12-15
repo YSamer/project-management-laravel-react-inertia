@@ -33,7 +33,7 @@ export default function Show({ auth, task }) {
                             <img
                                 src={task.image_path}
                                 alt=""
-                                className="w-full h-64 object-cover"
+                                className="w-full h-64 object-contain"
                             />
                         </div>
                         <div className="p-4 text-gray-900">

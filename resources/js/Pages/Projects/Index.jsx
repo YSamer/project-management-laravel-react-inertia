@@ -215,7 +215,7 @@ export default function Index({ auth, projects, queryParams = null, success }) {
                                                 </td>
                                                 <td className="px-3 py-2">
                                                     <img
-                                                        className="h-20 w-48 object-cover rounded-sm"
+                                                        className="h-20 w-48 object-contain rounded-sm"
                                                         src={project.image_path}
                                                         alt=""
                                                     />
