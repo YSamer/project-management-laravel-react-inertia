@@ -41,13 +41,13 @@ export default function Show({ auth, project, success, tasks, queryParams }) {
                                         </label>
                                         <p className="mt-1">{project.id}</p>
                                     </div>
-                                    <div className="mt-4">
+                                    <div className="mt-6">
                                         <label className="font-bold text-lg">
                                             Project Name
                                         </label>
                                         <p className="mt-1">{project.name}</p>
                                     </div>
-                                    <div className="mt-4">
+                                    <div className="mt-6">
                                         <label className="font-bold text-lg">
                                             Project Status
                                         </label>
@@ -69,7 +69,7 @@ export default function Show({ auth, project, success, tasks, queryParams }) {
                                             </span>
                                         </p>
                                     </div>
-                                    <div className="mt-4">
+                                    <div className="mt-6">
                                         <label className="font-bold text-lg">
                                             Created By
                                         </label>
@@ -81,32 +81,44 @@ export default function Show({ auth, project, success, tasks, queryParams }) {
                                 <div>
                                     <div>
                                         <label className="font-bold text-lg">
+                                            Start Date
+                                        </label>
+                                        <p className="mt-1">
+                                            {project.start_date ||
+                                                "Not Available"}
+                                        </p>
+                                    </div>
+                                    <div>
+                                        <label className="font-bold text-lg">
                                             Due Date
                                         </label>
                                         <p className="mt-1">
-                                            {project.due_date}
+                                            {project.due_date ||
+                                                "Not Available"}
                                         </p>
                                     </div>
-                                    <div className="mt-4">
+                                    <div className="mt-6">
                                         <label className="font-bold text-lg">
                                             Created Date
                                         </label>
                                         <p className="mt-1">
-                                            {project.created_at}
+                                            {project.created_at ||
+                                                "Not Available"}
                                         </p>
                                     </div>
 
-                                    <div className="mt-4">
+                                    <div className="mt-6">
                                         <label className="font-bold text-lg">
                                             Updated By
                                         </label>
                                         <p className="mt-1">
-                                            {project.updatedBy?.name || ""}
+                                            {project.updatedBy?.name ||
+                                                "Not Available"}
                                         </p>
                                     </div>
                                 </div>
                             </div>
-                            <div>
+                            <div className="mt-6">
                                 <label className="font-bold text-lg">
                                     Description
                                 </label>

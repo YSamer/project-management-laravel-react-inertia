@@ -17,6 +17,7 @@ class Project extends Model
         'image_path',
         'status',
         'due_date',
+        'start_date',
         'created_by',
         'updated_by',
     ];

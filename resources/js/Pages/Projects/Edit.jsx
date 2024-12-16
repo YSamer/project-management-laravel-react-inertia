@@ -15,6 +15,7 @@ export default function Edit({ auth, project }) {
         status: project.status || "",
         description: project.description || "",
         due_date: project.due_date || "",
+        start_date: project.start_date || "",
         _method: "PUT",
     });
 
@@ -111,6 +112,27 @@ export default function Edit({ auth, project }) {
                                 />
                                 <InputError
                                     message={errors.description}
+                                    className="mt-2"
+                                />
+                            </div>
+                            {/* Start Data */}
+                            <div className="mt-4">
+                                <InputLabel
+                                    htmlFor="project_start_date"
+                                    value="Project Start Date"
+                                />
+                                <TextInput
+                                    id="project_start_date"
+                                    type="date"
+                                    name="start_date"
+                                    value={data.start_date}
+                                    className="mt-1 block w-full"
+                                    onChange={(e) =>
+                                        setData("start_date", e.target.value)
+                                    }
+                                />
+                                <InputError
+                                    message={errors.start_date}
                                     className="mt-2"
                                 />
                             </div>

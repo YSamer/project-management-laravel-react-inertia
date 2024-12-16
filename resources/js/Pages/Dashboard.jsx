@@ -97,63 +97,67 @@ export default function Dashboard({
                             <h3 className="text-gray-800 text-2xl font-semibold">
                                 My Active Tasks
                             </h3>
-                            <table className="w-full text-sm text-left rtl:text-right text-gray-500 mt-4">
-                                <thead className="text-xs text-gray-700 uppercase bg-gray-50 border-b-2 border-gray-500">
-                                    <th className="px-3 py-3">ID</th>
-                                    <th className="px-3 py-3">Project Name</th>
-                                    <th className="px-3 py-3">Name</th>
-                                    <th className="px-3 py-3">Status</th>
-                                    <th className="px-3 py-3">Due Date</th>
-                                </thead>
-                                <tbody>
-                                    {activeTasks.data.map((task) => (
-                                        <tr key={task.id}>
-                                            <td className="px-3 py-2">
-                                                {task.id}
-                                            </td>
-                                            <th className="px-3 py-2 text-black hover:underline">
-                                                <Link
-                                                    href={route(
-                                                        "projects.show",
-                                                        task.project.id
-                                                    )}
-                                                >
-                                                    {task.project.name}
-                                                </Link>
-                                            </th>
-                                            <th className="px-3 py-2 text-black hover:underline">
-                                                <Link
-                                                    href={route(
-                                                        "tasks.show",
-                                                        task.id
-                                                    )}
-                                                >
-                                                    {task.name}
-                                                </Link>
-                                            </th>
-                                            <td className="px-3 py-2">
-                                                <span
-                                                    className={
-                                                        "px-2 py-1 text-nowrap rounded text-white " +
-                                                        TASK_STATUS_CLASS_MAP[
-                                                            task.status
-                                                        ]
-                                                    }
-                                                >
-                                                    {
-                                                        TASK_STATUS_LABELS[
-                                                            task.status
-                                                        ]
-                                                    }
-                                                </span>
-                                            </td>
-                                            <td className="px-3 py-2">
-                                                {task.due_date}
-                                            </td>
-                                        </tr>
-                                    ))}
-                                </tbody>
-                            </table>
+                            <div className="overflow-auto">
+                                <table className="w-full text-sm text-left rtl:text-right text-gray-500 mt-4">
+                                    <thead className="text-xs text-gray-700 uppercase bg-gray-50 border-b-2 border-gray-500">
+                                        <th className="px-3 py-3">ID</th>
+                                        <th className="px-3 py-3">
+                                            Project Name
+                                        </th>
+                                        <th className="px-3 py-3">Name</th>
+                                        <th className="px-3 py-3">Status</th>
+                                        <th className="px-3 py-3">Due Date</th>
+                                    </thead>
+                                    <tbody>
+                                        {activeTasks.data.map((task) => (
+                                            <tr key={task.id}>
+                                                <td className="px-3 py-2">
+                                                    {task.id}
+                                                </td>
+                                                <th className="px-3 py-2 text-black hover:underline text-nowrap">
+                                                    <Link
+                                                        href={route(
+                                                            "projects.show",
+                                                            task.project.id
+                                                        )}
+                                                    >
+                                                        {task.project.name}
+                                                    </Link>
+                                                </th>
+                                                <th className="px-3 py-2 text-black hover:underline text-nowrap">
+                                                    <Link
+                                                        href={route(
+                                                            "tasks.show",
+                                                            task.id
+                                                        )}
+                                                    >
+                                                        {task.name}
+                                                    </Link>
+                                                </th>
+                                                <td className="px-3 py-2">
+                                                    <span
+                                                        className={
+                                                            "px-2 py-1 text-nowrap rounded text-white " +
+                                                            TASK_STATUS_CLASS_MAP[
+                                                                task.status
+                                                            ]
+                                                        }
+                                                    >
+                                                        {
+                                                            TASK_STATUS_LABELS[
+                                                                task.status
+                                                            ]
+                                                        }
+                                                    </span>
+                                                </td>
+                                                <td className="px-3 py-2">
+                                                    {task.due_date}
+                                                </td>
+                                            </tr>
+                                        ))}
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                     </div>
                 </div>

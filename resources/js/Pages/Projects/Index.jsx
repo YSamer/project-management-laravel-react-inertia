@@ -89,7 +89,6 @@ export default function Index({ auth, projects, queryParams = null, success }) {
                                             >
                                                 ID
                                             </TableHeading>
-                                            <TableHeading>Image</TableHeading>
                                             <TableHeading
                                                 name="name"
                                                 sort_field={
@@ -100,7 +99,7 @@ export default function Index({ auth, projects, queryParams = null, success }) {
                                                 }
                                                 sortChanged={sortChanged}
                                             >
-                                                Name
+                                                Project
                                             </TableHeading>
                                             <TableHeading
                                                 name="status"
@@ -127,6 +126,18 @@ export default function Index({ auth, projects, queryParams = null, success }) {
                                                 Created Data
                                             </TableHeading>
                                             <TableHeading
+                                                name="start_date"
+                                                sort_field={
+                                                    queryParams.sort_field
+                                                }
+                                                sort_direction={
+                                                    queryParams.sort_direction
+                                                }
+                                                sortChanged={sortChanged}
+                                            >
+                                                Start Data
+                                            </TableHeading>
+                                            <TableHeading
                                                 name="due_date"
                                                 sort_field={
                                                     queryParams.sort_field
@@ -146,7 +157,6 @@ export default function Index({ auth, projects, queryParams = null, success }) {
                                     </thead>
                                     <thead className="text-xs text-gray-700 uppercase bg-gray-50 border-b-2 border-gray-500">
                                         <tr className="text-nowrap">
-                                            <th className="px-3 py-3"></th>
                                             <th className="px-3 py-3"></th>
                                             <th className="px-3 py-3">
                                                 <TextInput
@@ -202,6 +212,7 @@ export default function Index({ auth, projects, queryParams = null, success }) {
                                             <th className="px-3 py-3"></th>
                                             <th className="px-3 py-3"></th>
                                             <th className="px-3 py-3"></th>
+                                            <th className="px-3 py-3"></th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -213,20 +224,21 @@ export default function Index({ auth, projects, queryParams = null, success }) {
                                                 <td className="px-3 py-2">
                                                     {project.id}
                                                 </td>
-                                                <td className="px-3 py-2">
-                                                    <img
-                                                        className="h-20 w-48 object-contain rounded-sm"
-                                                        src={project.image_path}
-                                                        alt=""
-                                                    />
-                                                </td>
                                                 <th className="px-3 py-2 text-black text-nowrap hover:underline">
                                                     <Link
                                                         href={route(
                                                             "projects.show",
                                                             project.id
                                                         )}
+                                                        className="flex items-center gap-3"
                                                     >
+                                                        <img
+                                                            className="h-12 w-12 object-cover rounded-lg"
+                                                            src={
+                                                                project.image_path
+                                                            }
+                                                            alt=""
+                                                        />
                                                         {project.name}
                                                     </Link>
                                                 </th>
@@ -248,6 +260,9 @@ export default function Index({ auth, projects, queryParams = null, success }) {
                                                 </td>
                                                 <td className="px-3 py-2 text-nowrap">
                                                     {project.created_at}
+                                                </td>
+                                                <td className="px-3 py-2 text-nowrap">
+                                                    {project.start_date}
                                                 </td>
                                                 <td className="px-3 py-2 text-nowrap">
                                                     {project.due_date}
