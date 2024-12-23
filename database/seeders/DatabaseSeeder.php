@@ -33,10 +33,18 @@ class DatabaseSeeder extends Seeder
             'email_verified_at' => now(),
             'role' => 'user',
         ]);
-        
+
         User::factory()->create([
             'name' => 'Hamza',
             'email' => 'hamza@test.com',
+            'password' => Hash::make('12345678'),
+            'email_verified_at' => now(),
+            'role' => 'user',
+        ]);
+
+        User::factory()->create([
+            'name' => 'Ahmed',
+            'email' => 'ahmed@test.com',
             'password' => Hash::make('12345678'),
             'email_verified_at' => now(),
             'role' => 'user',
