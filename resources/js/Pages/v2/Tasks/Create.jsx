@@ -1,13 +1,13 @@
-import InputError from "@/Components/InputError";
-import InputLabel from "@/Components/InputLabel";
-import SelectInput from "@/Components/SelectInput";
-import TextAreaInput from "@/Components/TextAreaInput";
-import TextInput from "@/Components/TextInput";
+import InputError from "@/Components/v2/InputError";
+import InputLabel from "@/Components/v2/InputLabel";
+import SelectInput from "@/Components/v2/SelectInput";
+import TextAreaInput from "@/Components/v2/TextAreaInput";
+import TextInput from "@/Components/v2/TextInput";
 import { TASK_PRIORITY_OPTIONS, TASK_STATUS_OPTIONS } from "@/constants";
-import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
+import AuthenticatedLayout from "@/Layouts/v2/AuthenticatedLayout";
 import { Head, Link, useForm } from "@inertiajs/react";
 
-export default function Create({ auth , projects, users}) {
+export default function Create({ auth, projects, users }) {
     const { data, setData, post, errors, reset } = useForm({
         image: "",
         name: "",
@@ -16,7 +16,7 @@ export default function Create({ auth , projects, users}) {
         due_date: "",
         priority: "",
         project_id: "",
-        assigned_user_id : "",
+        assigned_user_id: "",
     });
 
     const onSubmit = (e) => {
@@ -234,12 +234,11 @@ export default function Create({ auth , projects, users}) {
                                         )
                                     }
                                 >
-                                    <option value="">Select Assigned User</option>
+                                    <option value="">
+                                        Select Assigned User
+                                    </option>
                                     {users.data.map((user) => (
-                                        <option
-                                            key={user.id}
-                                            value={user.id}
-                                        >
+                                        <option key={user.id} value={user.id}>
                                             {user.name}
                                         </option>
                                     ))}

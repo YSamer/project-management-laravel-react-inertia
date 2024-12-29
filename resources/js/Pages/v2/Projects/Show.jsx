@@ -1,5 +1,5 @@
 import { PROJECT_STATUS_CLASS_MAP, PROJECT_STATUS_LABELS } from "@/constants";
-import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
+import AuthenticatedLayout from "@/Layouts/v2/AuthenticatedLayout";
 import { Head, Link } from "@inertiajs/react";
 import TasksTable from "../Tasks/TasksTable";
 export default function Show({ auth, project, success, tasks, queryParams }) {

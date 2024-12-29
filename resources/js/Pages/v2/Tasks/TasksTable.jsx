@@ -1,7 +1,7 @@
-import Pagination from "@/Components/Pagination";
-import SelectInput from "@/Components/SelectInput";
-import TableHeading from "@/Components/TableHeading";
-import TextInput from "@/Components/TextInput";
+import Pagination from "@/Components/v2/Pagination";
+import SelectInput from "@/Components/v2/SelectInput";
+import TableHeading from "@/Components/v2/TableHeading";
+import TextInput from "@/Components/v2/TextInput";
 import {
     TASK_STATUS_CLASS_MAP,
     TASK_STATUS_LABELS,

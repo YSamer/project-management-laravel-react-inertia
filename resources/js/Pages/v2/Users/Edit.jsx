@@ -1,7 +1,7 @@
-import InputError from "@/Components/InputError";
-import InputLabel from "@/Components/InputLabel";
-import TextInput from "@/Components/TextInput";
-import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
+import InputError from "@/Components/v2/InputError";
+import InputLabel from "@/Components/v2/InputLabel";
+import TextInput from "@/Components/v2/TextInput";
+import AuthenticatedLayout from "@/Layouts/v2/AuthenticatedLayout";
 import { Head, Link, useForm } from "@inertiajs/react";
 
 export default function Edit({ auth, user }) {

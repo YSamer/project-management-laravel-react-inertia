@@ -1,13 +1,13 @@
-import Pagination from "@/Components/Pagination";
-import SelectInput from "@/Components/SelectInput";
-import TableHeading from "@/Components/TableHeading";
-import TextInput from "@/Components/TextInput";
+import Pagination from "@/Components/v2/Pagination";
+import SelectInput from "@/Components/v2/SelectInput";
+import TableHeading from "@/Components/v2/TableHeading";
+import TextInput from "@/Components/v2/TextInput";
 import {
     PROJECT_STATUS_CLASS_MAP,
     PROJECT_STATUS_LABELS,
     PROJECT_STATUS_OPTIONS,
 } from "@/constants";
-import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
+import AuthenticatedLayout from "@/Layouts/v2/AuthenticatedLayout";
 import { Head, Link, router } from "@inertiajs/react";
 
 export default function Index({ auth, projects, queryParams = null, success }) {

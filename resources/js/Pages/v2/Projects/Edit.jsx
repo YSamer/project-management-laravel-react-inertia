@@ -1,10 +1,10 @@
-import InputError from "@/Components/InputError";
-import InputLabel from "@/Components/InputLabel";
-import SelectInput from "@/Components/SelectInput";
-import TextAreaInput from "@/Components/TextAreaInput";
-import TextInput from "@/Components/TextInput";
+import InputError from "@/Components/v2/InputError";
+import InputLabel from "@/Components/v2/InputLabel";
+import SelectInput from "@/Components/v2/SelectInput";
+import TextAreaInput from "@/Components/v2/TextAreaInput";
+import TextInput from "@/Components/v2/TextInput";
 import { PROJECT_STATUS_OPTIONS } from "@/constants";
-import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
+import AuthenticatedLayout from "@/Layouts/v2/AuthenticatedLayout";
 import { Head, Link, useForm } from "@inertiajs/react";
 
 export default function Edit({ auth, project }) {

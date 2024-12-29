@@ -1,7 +1,7 @@
-import Pagination from "@/Components/Pagination";
-import TableHeading from "@/Components/TableHeading";
-import TextInput from "@/Components/TextInput";
-import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
+import Pagination from "@/Components/v2/Pagination";
+import TableHeading from "@/Components/v2/TableHeading";
+import TextInput from "@/Components/v2/TextInput";
+import AuthenticatedLayout from "@/Layouts/v2/AuthenticatedLayout";
 import { Head, Link, router } from "@inertiajs/react";
 
 export default function Index({ auth, users, queryParams = null, success }) {

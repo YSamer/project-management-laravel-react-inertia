@@ -1,5 +1,5 @@
 import { TASK_STATUS_CLASS_MAP, TASK_STATUS_LABELS } from "@/constants";
-import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
+import AuthenticatedLayout from "@/Layouts/v2/AuthenticatedLayout";
 import { Head, Link } from "@inertiajs/react";
 
 export default function Dashboard({

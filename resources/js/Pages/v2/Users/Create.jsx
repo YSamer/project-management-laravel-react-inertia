@@ -1,7 +1,7 @@
-import InputError from "@/Components/InputError";
-import InputLabel from "@/Components/InputLabel";
-import TextInput from "@/Components/TextInput";
-import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
+import InputError from "@/Components/v2/InputError";
+import InputLabel from "@/Components/v2/InputLabel";
+import TextInput from "@/Components/v2/TextInput";
+import AuthenticatedLayout from "@/Layouts/v2/AuthenticatedLayout";
 import { Head, Link, useForm } from "@inertiajs/react";
 
 export default function Create({ auth }) {
@@ -113,7 +113,10 @@ export default function Create({ auth }) {
                                     value={data.password_confirmation}
                                     className="mt-1 block w-full"
                                     onChange={(e) =>
-                                        setData("password_confirmation", e.target.value)
+                                        setData(
+                                            "password_confirmation",
+                                            e.target.value
+                                        )
                                     }
                                 />
                                 <InputError
@@ -121,7 +124,6 @@ export default function Create({ auth }) {
                                     className="mt-2"
                                 />
                             </div>
-
 
                             {/* Buttons */}
                             <div className="mt-4 text-right">
