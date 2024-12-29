@@ -2,8 +2,8 @@
 
 namespace Database\Seeders;
 
-use App\Models\Project;
-use App\Models\User;
+use App\Models\v2\Project;
+use App\Models\v2\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
