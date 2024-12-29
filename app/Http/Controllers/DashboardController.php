@@ -47,7 +47,7 @@ class DashboardController extends Controller
         $activeTasks = TaskResource::collection($activeTasks);
 
         return Inertia::render(
-            'Dashboard',
+            'v2/Dashboard',
             compact(
                 'totalPendingTasks',
                 'totalMyPendingTasks',

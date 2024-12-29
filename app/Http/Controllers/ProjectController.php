@@ -32,7 +32,7 @@ class ProjectController extends Controller
 
         $projects = $query->orderBy($sortField, $sortDirection)
             ->paginate(10)->onEachSide(1);
-        return Inertia::render('Projects/Index', [
+        return Inertia::render('v2/Projects/Index', [
             'projects' => ProjectResource::collection($projects),
             'queryParams' => request()->query() ?: null,
             'success' => session('success'),
@@ -44,7 +44,7 @@ class ProjectController extends Controller
      */
     public function create()
     {
-        return Inertia::render('Projects/Create', []);
+        return Inertia::render('v2/Projects/Create', []);
     }
 
     /**
@@ -84,7 +84,7 @@ class ProjectController extends Controller
 
         $tasks = $query->orderBy($sortField, $sortDirection)
             ->paginate(10)->onEachSide(1);
-        return Inertia::render('Projects/Show', [
+        return Inertia::render('v2/Projects/Show', [
             'project' => new ProjectResource($project),
             'tasks' => TaskResource::collection($tasks),
             'queryParams' => request()->query() ?: null,
@@ -96,7 +96,7 @@ class ProjectController extends Controller
      */
     public function edit(Project $project)
     {
-        return Inertia::render('Projects/Edit', [
+        return Inertia::render('v2/Projects/Edit', [
             'project' => new ProjectResource($project),
         ]);
     }

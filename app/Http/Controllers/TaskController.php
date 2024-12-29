@@ -36,7 +36,7 @@ class TaskController extends Controller
         $tasks = $query->orderBy($sortField, $sortDirection)
             ->paginate(10)->onEachSide(1);
 
-        return Inertia::render('Tasks/Index', [
+        return Inertia::render('v2/Tasks/Index', [
             'tasks' => TaskResource::collection($tasks),
             'queryParams' => request()->query() ?: null,
             'success' => session('success'),
@@ -50,7 +50,7 @@ class TaskController extends Controller
     {
         $projects = Project::query()->orderBy('name', 'asc')->get();
         $users = User::query()->orderBy('name', 'asc')->get();
-        return Inertia::render('Tasks/Create', [
+        return Inertia::render('v2/Tasks/Create', [
             'projects' => ProjectResource::collection($projects),
             'users' => UserResource::collection($users),
         ]);
@@ -79,7 +79,7 @@ class TaskController extends Controller
      */
     public function show(Task $task)
     {
-        return Inertia::render('Tasks/Show', [
+        return Inertia::render('v2/Tasks/Show', [
             'task' => new TaskResource($task),
         ]);
     }
@@ -92,7 +92,7 @@ class TaskController extends Controller
         $projects = Project::query()->orderBy('name', 'asc')->get();
         $users = User::query()->orderBy('name', 'asc')->get();
 
-        return Inertia::render('Tasks/Edit', [
+        return Inertia::render('v2/Tasks/Edit', [
             'task' => new TaskResource($task),
             'projects' => ProjectResource::collection($projects),
             'users' => UserResource::collection($users),
@@ -150,7 +150,7 @@ class TaskController extends Controller
         $tasks = $query->orderBy($sortField, $sortDirection)
             ->paginate(10)->onEachSide(1);
 
-        return Inertia::render('Tasks/Index', [
+        return Inertia::render('v2/Tasks/Index', [
             'tasks' => TaskResource::collection($tasks),
             'queryParams' => request()->query() ?: null,
             'success' => session('success'),

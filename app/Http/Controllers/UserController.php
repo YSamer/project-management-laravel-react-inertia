@@ -30,7 +30,7 @@ class UserController extends Controller
 
         $users = $query->orderBy($sortField, $sortDirection)
             ->paginate(10)->onEachSide(1);
-        return Inertia::render('Users/Index', [
+        return Inertia::render('v2/Users/Index', [
             'users' => UserResource::collection($users),
             'queryParams' => request()->query() ?: null,
             'success' => session('success'),
@@ -42,7 +42,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        return Inertia::render('Users/Create', []);
+        return Inertia::render('v2/Users/Create', []);
     }
 
     /**
@@ -70,7 +70,7 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
-        return Inertia::render('Users/Edit', [
+        return Inertia::render('v2/Users/Edit', [
             'user' => new UserResource($user),
         ]);
     }
